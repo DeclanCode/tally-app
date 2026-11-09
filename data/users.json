@@ -247,69 +247,6 @@
     }
   },
   {
-    "id": "d_10e243",
-    "label": "d - Design Writer",
-    "email": "d@d.com",
-    "digest_enabled": true,
-    "target_roles": [
-      "Design Writer",
-      "UX Writer",
-      "Content Designer",
-      "Creative Strategist"
-    ],
-    "search_keywords": [
-      "Design",
-      "UX Writing",
-      "Content Strategy",
-      "Creative Direction",
-      "Copywriting"
-    ],
-    "remotive_categories": [
-      "all-others"
-    ],
-    "freehire_categories": [],
-    "location_preference": "Auckland, New Zealand (Remote / Hybrid / Global)",
-    "cv_data": {
-      "full_name": "d",
-      "headline": "DESIGN WRITER",
-      "email": "d@d.com",
-      "phone": "",
-      "location": "Auckland, New Zealand",
-      "linkedin": "",
-      "portfolio": "",
-      "summary": "Versatile and detail-oriented Design Writer and Creative Specialist based in Auckland, New Zealand. Proven ability to translate complex visual concepts into clear, engaging, and impactful communication across digital and print channels. Passionate about user-centered narrative strategy, modern design systems, and seamless brand experiences.",
-      "experience": [
-        {
-          "company": "Independent Design Consultancy",
-          "location": "Auckland, New Zealand",
-          "roles": [
-            {
-              "title": "Lead Design Writer & Strategist",
-              "dates": "2021 - Present",
-              "location": "Auckland, New Zealand",
-              "bullets": [
-                "Creative Narrative Strategy: Authored compelling brand narratives and design guidelines for multifaceted client initiatives.",
-                "Cross-Functional Collaboration: Partnered with visual artists, product designers, and project managers to streamline design documentation.",
-                "Content Optimization: Iterated on UX copy and visual messaging to elevate overall end-user engagement and user satisfaction."
-              ]
-            }
-          ]
-        }
-      ],
-      "technology": "Figma, Adobe Creative Cloud, Sketch, Canva, Miro, HTML/CSS, WordPress",
-      "skills": "Design Writing, Content Strategy, UX Copywriting, Visual Communication, Brand Identity, Information Architecture",
-      "certifications": "Certified UX Content Designer",
-      "interests": "Typography, Visual Arts, Digital Storytelling, Modern Architecture",
-      "education": [
-        {
-          "institution": "University of Auckland",
-          "degree": "Bachelor of Design",
-          "location": "Auckland, New Zealand"
-        }
-      ]
-    }
-  },
-  {
     "id": "d_cooke_68f5f0",
     "label": "D Cooke - 3D Modeller & CNC Fabrication Specialist",
     "email": "declan_j_c1@hotmail.com",

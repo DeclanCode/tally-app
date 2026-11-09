@@ -179,6 +179,10 @@ def run_daily_brief_for_all_users():
         if not user.get("digest_enabled", False):
             continue
         uid = user["id"]
+        # Declan's daily email is already handled by his dedicated freehire-cloud-tracker workflow
+        if uid == "declan":
+            print("[*] Skipping 'declan' in Tally digest (handled by dedicated freehire-cloud-tracker).")
+            continue
         user_seen = set(seen_map.get(uid, []))
 
         print(f"[*] Running Tally daily scan for {uid} ({user.get('email')})...")
