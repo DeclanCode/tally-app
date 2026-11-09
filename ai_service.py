@@ -72,8 +72,8 @@ def fetch_job_page_text(url):
                 posting = data.get("posting") or {}
                 title = posting.get("title") or ""
                 desc = posting.get("descriptionPlainText") or posting.get("descriptionHtml") or ""
-                desc_clean = re.sub(r"<[^<]+?>", " ", desc)
-                return f"Job Title: {title}\n{re.sub(r'\\s+', ' ', desc_clean).strip()}"[:8000]
+                desc_clean = re.sub(r"\s+", " ", re.sub(r"<[^<]+?>", " ", desc)).strip()
+                return f"Job Title: {title}\n{desc_clean}"[:8000]
             except Exception:
                 pass
         cleaned = re.sub(r"<style.*?>.*?</style>", " ", html_text, flags=re.S)
