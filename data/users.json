@@ -308,5 +308,69 @@
         }
       ]
     }
+  },
+  {
+    "id": "d_cooke_68f5f0",
+    "label": "D Cooke - 3D Modeller & CNC Fabrication Specialist",
+    "email": "declan_j_c1@hotmail.com",
+    "digest_enabled": true,
+    "target_roles": [
+      "3D Modeller",
+      "CNC Programmer / Modeller",
+      "Digital Fabrication Specialist",
+      "CAD/CAM Specialist"
+    ],
+    "search_keywords": [
+      "3D Modelling",
+      "CNC Machining",
+      "CAD/CAM",
+      "Digital Fabrication",
+      "Parametric Design"
+    ],
+    "remotive_categories": [
+      "all-others"
+    ],
+    "freehire_categories": [],
+    "location_preference": "Auckland, New Zealand (Remote / Hybrid / Global)",
+    "cv_data": {
+      "full_name": "D Cooke",
+      "headline": "3D MODELLER & DIGITAL FABRICATION SPECIALIST",
+      "email": "declan_j_c1@hotmail.com",
+      "phone": "",
+      "location": "Auckland, New Zealand",
+      "linkedin": "",
+      "portfolio": "",
+      "summary": "Precision-focused 3D Modeller and Digital Fabrication Specialist with extensive experience generating production-ready models for CNC machining and industrial fabrication. Adept at transforming technical concepts and 2D blueprints into highly accurate 3D CAD assets optimized for multi-axis tooling, subtractive manufacturing, and tight tolerance specs. Collaborates seamlessly with engineers, machinists, and project managers to streamline production workflows and cut material waste.",
+      "experience": [
+        {
+          "company": "3D Fabrication & Modelling Services",
+          "location": "Auckland, New Zealand",
+          "roles": [
+            {
+              "title": "3D Modeller & CNC Specialist",
+              "dates": "2020 (Present)",
+              "location": "Auckland, New Zealand",
+              "bullets": [
+                "Precision CAD Construction: Developed high-precision 3D surface and solid models tailored specifically for multi-axis CNC routers and automated fabrication equipment.",
+                "Design for Manufacturability: Optimized complex model geometries and material allowances to ensure zero-defect CNC output and reduced machining cycle times.",
+                "Technical Workflow Integration: Translated raw conceptual sketches and client specifications into standardized digital assets ready for CAM programming and physical production.",
+                "Quality Control Standards: Applied tight dimensioning and tolerancing techniques to deliver components that consistently met strict fit-and-finish specifications."
+              ]
+            }
+          ]
+        }
+      ],
+      "technology": "SolidWorks, Fusion 360, Rhino 3D, AutoCAD, Mastercam, G-code, CNC Routers, 3D Printing (FDM/SLA)",
+      "skills": "3D Modelling, CNC Machining, CAD/CAM Integration, Parametric Design, Precision Tolerancing, Digital Fabrication, Rapid Prototyping",
+      "certifications": "Certified SolidWorks Professional (CSWP), Advanced CAD/CAM Fabrication Certificate",
+      "interests": "Additive Manufacturing, Industrial Design, Custom CNC Tooling, Robotics",
+      "education": [
+        {
+          "institution": "Auckland University of Technology",
+          "degree": "Diploma in Computer-Aided Design & Manufacturing",
+          "location": "Auckland, New Zealand"
+        }
+      ]
+    }
   }
 ]
