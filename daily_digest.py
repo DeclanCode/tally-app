@@ -173,7 +173,7 @@ def send_user_digest_email(user, top_3, relatable, app_base_url=""):
 def run_daily_brief_for_all_users():
     users = load_users()
     seen_map = load_seen()
-    app_url = os.getenv("TALLY_APP_URL", "")
+    app_url = os.getenv("TALLY_APP_URL", "https://tally-app-75dy.onrender.com")
 
     for user in users:
         if not user.get("digest_enabled", False):

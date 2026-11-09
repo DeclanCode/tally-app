@@ -29,6 +29,7 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           SMTP_USER: ${{ secrets.SMTP_USER }}
           SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          TALLY_APP_URL: "https://tally-app-75dy.onrender.com"
         run: python daily_digest.py
 
       - name: Commit updated seen_jobs state

@@ -103,11 +103,41 @@ def sync_users_to_github(users: List[Dict[str, Any]]):
         print(f"[!] GitHub sync warning: {e}")
 
 
+def pull_users_from_github() -> Optional[List[Dict[str, Any]]]:
+    gh_token = os.getenv("GITHUB_SYNC_TOKEN", "")
+    gh_repo = os.getenv("GITHUB_REPO", "DeclanCode/tally-app")
+    try:
+        api_url = f"https://api.github.com/repos/{gh_repo}/contents/data/users.json"
+        headers = {
+            "Accept": "application/vnd.github+json",
+            "X-GitHub-Api-Version": "2022-11-28"
+        }
+        if gh_token:
+            headers["Authorization"] = f"Bearer {gh_token}"
+        r = requests.get(api_url, headers=headers, timeout=10)
+        if r.status_code == 200:
+            content_b64 = r.json().get("content", "")
+            if content_b64:
+                decoded = base64.b64decode(content_b64).decode("utf-8")
+                users = json.loads(decoded)
+                with open(USERS_FILE, "w", encoding="utf-8") as f:
+                    json.dump(users, f, indent=2, ensure_ascii=False)
+                return users
+    except Exception as e:
+        print(f"[!] GitHub pull warning: {e}")
+    return None
+
+
 def get_user_by_id(user_id: str) -> Dict[str, Any]:
     users = load_users()
     for u in users:
         if u["id"] == user_id:
             return u
+    remote_users = pull_users_from_github()
+    if remote_users:
+        for u in remote_users:
+            if u["id"] == user_id:
+                return u
     raise HTTPException(status_code=404, detail=f"Profile '{user_id}' not found")
 
 
