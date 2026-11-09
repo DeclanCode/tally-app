@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tally</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .custom-scroll::-webkit-scrollbar { width: 5px; height: 5px; }
+    .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col">
+
+  <!-- Minimal Header -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-40">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
+      <div class="flex items-center gap-2.5">
+        <div class="w-7 h-7 rounded-lg bg-slate-900 text-white flex items-center justify-center font-bold text-sm">
+          T
+        </div>
+        <span class="font-bold text-sm tracking-tight text-slate-900">Tally</span>
+      </div>
+
+      <!-- Navigation Tabs (Hidden during onboarding) -->
+      <nav id="main-nav-tabs" class="hidden flex items-center gap-1 bg-slate-100 p-1 rounded-lg">
+        <button onclick="switchTab('tailor')" id="tab-btn-tailor" class="px-3 py-1 rounded-md text-xs font-semibold transition bg-white text-slate-900 shadow-sm">
+          Tailor CV
+        </button>
+        <button onclick="switchTab('radar')" id="tab-btn-radar" class="px-3 py-1 rounded-md text-xs font-semibold transition text-slate-500 hover:text-slate-900">
+          Job Matches
+        </button>
+        <button onclick="switchTab('profile')" id="tab-btn-profile" class="px-3 py-1 rounded-md text-xs font-semibold transition text-slate-500 hover:text-slate-900">
+          My Profile
+        </button>
+      </nav>
+
+      <!-- Minimal User Pill -->
+      <div id="header-user-badge" class="hidden flex items-center gap-2">
+        <button onclick="previewMasterCV()" class="text-xs font-medium text-slate-600 hover:text-slate-900 px-2.5 py-1 rounded-md hover:bg-slate-100 transition">
+          Master CV ↗
+        </button>
+        <div id="nav-avatar" class="w-7 h-7 rounded-full bg-slate-900 text-white font-semibold text-xs flex items-center justify-center">
+          ME
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= VIEW A: MINIMAL ONBOARDING ================= -->
+  <div id="onboarding-view" class="hidden max-w-lg w-full mx-auto px-4 py-12 flex-1 flex flex-col justify-center">
+    <div class="bg-white rounded-2xl border border-slate-200/90 p-7 sm:p-8 shadow-sm">
+      <h1 class="text-xl font-bold text-slate-900 tracking-tight">Create your profile</h1>
+      <p class="text-xs text-slate-500 mt-1">
+        Upload your current CV or add a short summary of your background to get started.
+      </p>
+
+      <form id="onboard-form" onsubmit="submitOnboarding(event)" class="mt-6 space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Full Name</label>
+          <input id="ob-name" type="text" required placeholder="Your name"
+            class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900" />
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Email</label>
+            <input id="ob-email" type="email" required placeholder="you@example.com"
+              class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Target Role</label>
+            <input id="ob-specialty" type="text" required placeholder="e.g. Product Designer, Engineer"
+              class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900" />
+          </div>
+        </div>
+
+        <!-- Upload Existing CV PDF -->
+        <div class="border border-dashed border-slate-300 rounded-xl p-4 bg-slate-50/60">
+          <label class="cursor-pointer block">
+            <span class="text-xs font-semibold text-slate-700 block">Upload your existing CV (PDF or TXT)</span>
+            <input id="ob-file" type="file" accept=".pdf,.txt,.md"
+              class="mt-2 w-full text-xs text-slate-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-slate-900 file:text-white hover:file:bg-slate-800" />
+          </label>
+        </div>
+
+        <!-- Or Brief Notes (Neutral, clean placeholder!) -->
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">
+            Or describe your experience & key skills
+          </label>
+          <textarea id="ob-notes" rows="4"
+            placeholder="List your recent roles, key projects, and tools/equipment you work with..."
+            class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs leading-relaxed focus:outline-none focus:ring-2 focus:ring-slate-900"></textarea>
+        </div>
+
+        <div class="flex items-center gap-2 pt-1">
+          <input id="ob-digest" type="checkbox" checked class="w-3.5 h-3.5 text-slate-900 rounded border-slate-300" />
+          <label for="ob-digest" class="text-xs text-slate-600">
+            Email me daily job matches at 7:00 AM
+          </label>
+        </div>
+
+        <button type="submit" id="btn-onboard-submit"
+          class="w-full bg-slate-900 hover:bg-slate-800 text-white font-semibold py-2.5 px-4 rounded-lg transition text-sm">
+          Continue
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= VIEW B: CLEAN WORKSPACE ================= -->
+  <main id="workspace-view" class="hidden max-w-5xl w-full mx-auto px-4 sm:px-6 py-8 flex-1">
+
+    <!-- ================= TAB 1: TAILOR CV ================= -->
+    <section id="tab-tailor" class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <!-- Left: Simple Input -->
+      <div class="lg:col-span-5 space-y-4">
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm space-y-4">
+          <div>
+            <h2 class="font-bold text-slate-900 text-base">Tailor for a Job</h2>
+            <p class="text-xs text-slate-500 mt-0.5">Paste a job link or description to generate a tailored CV & cover letter.</p>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Job Link</label>
+            <div class="flex gap-2">
+              <input id="tailor-url" type="url" placeholder="https://..."
+                class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-slate-900" />
+              <button onclick="autoFetchUrl()" id="btn-fetch-url" class="shrink-0 bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-2 rounded-lg text-xs font-medium transition">
+                Fetch
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Job Description</label>
+            <textarea id="tailor-desc" rows="6" placeholder="Paste the job description here..."
+              class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs leading-relaxed focus:outline-none focus:ring-2 focus:ring-slate-900 custom-scroll"></textarea>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Anything specific to highlight? (Optional)</label>
+            <input id="tailor-notes" type="text" placeholder="e.g. Highlight my leadership or specific project experience"
+              class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-slate-900" />
+          </div>
+
+          <button onclick="runTailorStudio()" id="btn-run-tailor"
+            class="w-full bg-slate-900 hover:bg-slate-800 text-white font-semibold py-2.5 px-4 rounded-lg transition text-xs">
+            Generate Tailored CV & Cover Letter
+          </button>
+        </div>
+
+        <!-- Compact History -->
+        <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-sm">
+          <h4 class="font-semibold text-slate-700 text-xs mb-2.5">Recent Applications</h4>
+          <div id="history-list" class="space-y-2 max-h-56 overflow-y-auto custom-scroll">
+            <p class="text-xs text-slate-400">None yet.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Preview -->
+      <div class="lg:col-span-7">
+        <div id="tailor-empty-state" class="bg-white rounded-xl border border-dashed border-slate-200 p-12 text-center h-full flex flex-col items-center justify-center">
+          <p class="text-xs text-slate-400">Your tailored 1-page CV and cover letter will appear here.</p>
+        </div>
+
+        <div id="tailor-result-card" class="hidden bg-white rounded-xl border border-slate-200 p-5 shadow-sm space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3">
+            <div>
+              <h3 id="res-title-company" class="font-bold text-slate-900 text-sm">Role at Company</h3>
+              <p id="res-summary" class="text-xs text-slate-500 mt-0.5"></p>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <a id="res-cv-download" href="#" target="_blank" class="bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition">
+                Download CV
+              </a>
+              <a id="res-cl-download" href="#" target="_blank" class="border border-slate-300 hover:bg-slate-100 text-slate-700 text-xs font-semibold px-3 py-1.5 rounded-lg transition">
+                Download Cover Letter
+              </a>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-1.5 border-b border-slate-100 pb-2">
+            <button onclick="switchPreview('cv')" id="prev-btn-cv" class="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-900 text-white">
+              CV Preview
+            </button>
+            <button onclick="switchPreview('cl')" id="prev-btn-cl" class="text-xs font-semibold px-2.5 py-1 rounded-md text-slate-500 hover:bg-slate-100">
+              Cover Letter
+            </button>
+            <button onclick="switchPreview('pitch')" id="prev-btn-pitch" class="text-xs font-semibold px-2.5 py-1 rounded-md text-slate-500 hover:bg-slate-100">
+              Short Intro Note
+            </button>
+          </div>
+
+          <div id="prev-pane-cv">
+            <iframe id="cv-pdf-iframe" src="" class="w-full h-[600px] rounded-lg border border-slate-200 bg-slate-50"></iframe>
+          </div>
+
+          <div id="prev-pane-cl" class="hidden space-y-3">
+            <div class="bg-slate-50 rounded-lg p-3.5 border border-slate-200">
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="text-xs font-semibold text-slate-700">Cover Letter Text</span>
+                <button onclick="copyText('res-cl-text')" class="text-xs font-semibold text-blue-600 hover:underline">Copy</button>
+              </div>
+              <pre id="res-cl-text" class="text-xs text-slate-800 whitespace-pre-wrap font-sans leading-relaxed"></pre>
+            </div>
+            <iframe id="cl-pdf-iframe" src="" class="w-full h-[460px] rounded-lg border border-slate-200 bg-slate-50"></iframe>
+          </div>
+
+          <div id="prev-pane-pitch" class="hidden">
+            <div class="bg-slate-50 rounded-lg p-4 border border-slate-200">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-semibold text-slate-700">Short Intro Note (For application form textboxes)</span>
+                <button onclick="copyText('res-pitch-text')" class="text-xs font-semibold text-blue-600 hover:underline">Copy</button>
+              </div>
+              <pre id="res-pitch-text" class="text-xs text-slate-800 whitespace-pre-wrap font-sans leading-relaxed bg-white p-3 rounded-md border border-slate-200"></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TAB 2: JOB MATCHES ================= -->
+    <section id="tab-radar" class="hidden space-y-5">
+      <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-sm flex items-center justify-between">
+        <div>
+          <h3 class="font-bold text-slate-900 text-sm">Job Matches</h3>
+          <p class="text-xs text-slate-500">Curated remote & global roles matching your profile.</p>
+        </div>
+        <button onclick="loadRadar(true)" id="btn-refresh-radar" class="bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold px-3.5 py-2 rounded-lg transition">
+          Scan for Jobs
+        </button>
+      </div>
+
+      <div id="radar-top3" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="col-span-3 bg-white rounded-xl border border-slate-200 p-8 text-center text-xs text-slate-400">
+          Click "Scan for Jobs" to find matching roles.
+        </div>
+      </div>
+
+      <div id="radar-relatable" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+    </section>
+
+    <!-- ================= TAB 3: MY PROFILE ================= -->
+    <section id="tab-profile" class="hidden max-w-2xl mx-auto space-y-5">
+      <!-- Quick AI Update -->
+      <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm space-y-3">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="font-bold text-slate-900 text-sm">Update CV with AI</h3>
+            <p class="text-xs text-slate-500">Upload a new CV file or type changes you want made to your Master CV.</p>
+          </div>
+          <button onclick="previewMasterCV()" class="text-xs font-semibold text-blue-600 hover:underline">
+            View Current PDF ↗
+          </button>
+        </div>
+
+        <input id="rebuild-cv-file" type="file" accept=".pdf,.txt,.md"
+          class="w-full text-xs text-slate-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-slate-100 file:text-slate-800 hover:file:bg-slate-200" />
+
+        <textarea id="ai-notes-input" rows="3"
+          placeholder="Or describe any updates, new roles, or changes you'd like to make..."
+          class="w-full rounded-lg border border-slate-300 p-3 text-xs leading-relaxed focus:outline-none focus:ring-2 focus:ring-slate-900"></textarea>
+
+        <button onclick="rebuildProfileWithUploadOrNotes()" id="btn-ai-rebuild"
+          class="bg-slate-900 hover:bg-slate-800 text-white font-semibold py-2 px-4 rounded-lg text-xs transition">
+          Update Master CV
+        </button>
+      </div>
+
+      <!-- Clean Basic Fields -->
+      <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <h3 class="font-bold text-slate-900 text-sm">Profile Details</h3>
+          <button onclick="saveProfileChanges()" id="btn-save-profile" class="bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold px-3.5 py-1.5 rounded-lg transition">
+            Save Changes
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Full Name</label>
+            <input id="cv-fullname" type="text" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Headline Title</label>
+            <input id="cv-headline" type="text" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Email</label>
+            <input id="cv-email" type="text" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Phone</label>
+            <input id="cv-phone" type="text" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Location</label>
+            <input id="cv-location" type="text" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">LinkedIn or Portfolio URL</label>
+            <input id="cv-linkedin" type="text" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Summary</label>
+          <textarea id="cv-summary" rows="3" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs leading-relaxed"></textarea>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Tools & Technology</label>
+          <textarea id="cv-tech" rows="2" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs"></textarea>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Target Job Search Keywords</label>
+          <input id="prof-keywords" type="text" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs" />
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    let CURRENT_USER = null;
+    let HISTORY = [];
+    let ACTIVE_USER_ID = null;
+
+    async function initApp() {
+      const params = new URLSearchParams(window.location.search);
+      const urlUser = params.get("u");
+      const isNew = params.get("new") === "1" || params.get("onboard") === "1";
+
+      if (isNew) {
+        showOnboardingView();
+        return;
+      }
+
+      ACTIVE_USER_ID = urlUser || localStorage.getItem("tally_user_id") || "declan";
+
+      try {
+        const res = await fetch(`/api/profile/${ACTIVE_USER_ID}`);
+        if (!res.ok) {
+          showOnboardingView();
+          return;
+        }
+        const data = await res.json();
+        CURRENT_USER = data.user;
+        HISTORY = data.history || [];
+        localStorage.setItem("tally_user_id", CURRENT_USER.id);
+        showWorkspaceView();
+      } catch (e) {
+        showOnboardingView();
+      }
+    }
+
+    function showOnboardingView() {
+      document.getElementById("onboarding-view").classList.remove("hidden");
+      document.getElementById("workspace-view").classList.add("hidden");
+      document.getElementById("main-nav-tabs").classList.add("hidden");
+      document.getElementById("header-user-badge").classList.add("hidden");
+    }
+
+    function showWorkspaceView() {
+      document.getElementById("onboarding-view").classList.add("hidden");
+      document.getElementById("workspace-view").classList.remove("hidden");
+      document.getElementById("main-nav-tabs").classList.remove("hidden");
+      document.getElementById("header-user-badge").classList.remove("hidden");
+      renderActiveUserUI();
+      renderHistory();
+    }
+
+    async function submitOnboarding(e) {
+      e.preventDefault();
+      const btn = document.getElementById("btn-onboard-submit");
+      const origText = btn.textContent;
+      btn.textContent = "Building your profile...";
+      btn.disabled = true;
+
+      try {
+        const fd = new FormData();
+        fd.append("full_name", document.getElementById("ob-name").value.trim());
+        fd.append("target_specialty", document.getElementById("ob-specialty").value.trim());
+        fd.append("email", document.getElementById("ob-email").value.trim());
+        fd.append("raw_notes", document.getElementById("ob-notes").value.trim());
+        fd.append("digest_enabled", document.getElementById("ob-digest").checked ? "true" : "false");
+
+        const fileInput = document.getElementById("ob-file");
+        if (fileInput.files.length > 0) {
+          fd.append("cv_file", fileInput.files[0]);
+        }
+
+        const res = await fetch("/api/onboard", { method: "POST", body: fd });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || "Onboarding failed");
+
+        CURRENT_USER = data.user;
+        ACTIVE_USER_ID = CURRENT_USER.id;
+        HISTORY = [];
+        localStorage.setItem("tally_user_id", ACTIVE_USER_ID);
+        window.history.replaceState({}, "", `/?u=${ACTIVE_USER_ID}`);
+        showWorkspaceView();
+      } catch (err) {
+        alert("Error setting up profile: " + err.message);
+      } finally {
+        btn.textContent = origText;
+        btn.disabled = false;
+      }
+    }
+
+    function renderActiveUserUI() {
+      if (!CURRENT_USER) return;
+      const cv = CURRENT_USER.cv_data || {};
+      const initials = (cv.full_name || "ME").split(" ").map(x => x[0]).join("").slice(0, 2).toUpperCase();
+
+      document.getElementById("nav-avatar").textContent = initials;
+      document.getElementById("prof-keywords").value = (CURRENT_USER.search_keywords || []).join(", ");
+      document.getElementById("cv-fullname").value = cv.full_name || "";
+      document.getElementById("cv-headline").value = cv.headline || "";
+      document.getElementById("cv-email").value = cv.email || CURRENT_USER.email || "";
+      document.getElementById("cv-phone").value = cv.phone || "";
+      document.getElementById("cv-location").value = cv.location || "";
+      document.getElementById("cv-linkedin").value = cv.linkedin || "";
+      document.getElementById("cv-summary").value = cv.summary || "";
+      document.getElementById("cv-tech").value = cv.technology || "";
+    }
+
+    function switchTab(tab) {
+      ["tailor", "radar", "profile"].forEach(t => {
+        document.getElementById(`tab-${t}`).classList.toggle("hidden", t !== tab);
+        const btn = document.getElementById(`tab-btn-${t}`);
+        btn.className = t === tab
+          ? "px-3 py-1 rounded-md text-xs font-semibold transition bg-white text-slate-900 shadow-sm"
+          : "px-3 py-1 rounded-md text-xs font-semibold transition text-slate-500 hover:text-slate-900";
+      });
+      if (tab === "radar") {
+        loadRadar(false);
+      }
+    }
+
+    function switchPreview(pane) {
+      ["cv", "cl", "pitch"].forEach(p => {
+        document.getElementById(`prev-pane-${p}`).classList.toggle("hidden", p !== pane);
+        const btn = document.getElementById(`prev-btn-${p}`);
+        btn.className = p === pane
+          ? "text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-900 text-white"
+          : "text-xs font-semibold px-2.5 py-1 rounded-md text-slate-500 hover:bg-slate-100";
+      });
+    }
+
+    async function previewMasterCV() {
+      const res = await fetch(`/api/users/${ACTIVE_USER_ID}/master-pdf`);
+      const data = await res.json();
+      if (data.pdf_url) {
+        window.open(data.pdf_url, "_blank");
+      }
+    }
+
+    async function autoFetchUrl() {
+      const url = document.getElementById("tailor-url").value.trim();
+      if (!url) return alert("Paste a job URL first!");
+      const btn = document.getElementById("btn-fetch-url");
+      btn.textContent = "...";
+      btn.disabled = true;
+      try {
+        const res = await fetch("/api/scrape-url", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ url })
+        });
+        const data = await res.json();
+        if (data.text) {
+          document.getElementById("tailor-desc").value = data.text;
+        }
+      } catch (e) {
+        alert("Could not fetch URL automatically. Please paste the job description text.");
+      } finally {
+        btn.textContent = "Fetch";
+        btn.disabled = false;
+      }
+    }
+
+    async function runTailorStudio() {
+      const job_url = document.getElementById("tailor-url").value.trim();
+      const job_description = document.getElementById("tailor-desc").value.trim();
+      const custom_notes = document.getElementById("tailor-notes").value.trim();
+
+      if (!job_url && !job_description) {
+        return alert("Please paste a Job Link or Job Description first.");
+      }
+
+      const btn = document.getElementById("btn-run-tailor");
+      const origHtml = btn.textContent;
+      btn.textContent = "Generating (~12s)...";
+      btn.disabled = true;
+
+      try {
+        const res = await fetch("/api/tailor", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            user_id: ACTIVE_USER_ID,
+            job_url,
+            job_description,
+            custom_notes
+          })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || "Tailoring failed");
+
+        HISTORY.unshift(data.package);
+        renderHistory();
+        displayTailoredPackage(data.package);
+      } catch (e) {
+        alert("Error: " + e.message);
+      } finally {
+        btn.textContent = origHtml;
+        btn.disabled = false;
+      }
+    }
+
+    function displayTailoredPackage(pkg) {
+      document.getElementById("tailor-empty-state").classList.add("hidden");
+      document.getElementById("tailor-result-card").classList.remove("hidden");
+
+      document.getElementById("res-title-company").textContent = `${pkg.job_title} — ${pkg.company}`;
+      document.getElementById("res-summary").textContent = pkg.match_summary || "";
+      document.getElementById("res-cv-download").href = pkg.cv_url;
+      document.getElementById("res-cl-download").href = pkg.cl_url;
+      document.getElementById("cv-pdf-iframe").src = pkg.cv_url;
+      document.getElementById("cl-pdf-iframe").src = pkg.cl_url;
+      document.getElementById("res-cl-text").textContent = pkg.cover_letter_text || "";
+      document.getElementById("res-pitch-text").textContent = pkg.short_pitch || "";
+
+      switchPreview("cv");
+    }
+
+    function renderHistory() {
+      const container = document.getElementById("history-list");
+      if (!HISTORY || HISTORY.length === 0) {
+        container.innerHTML = `<p class="text-xs text-slate-400">None yet.</p>`;
+        return;
+      }
+      container.innerHTML = HISTORY.map(h => `
+        <div onclick='selectHistoryItem("${h.id}")' class="p-2.5 rounded-lg border border-slate-200 hover:border-slate-400 cursor-pointer transition flex items-center justify-between gap-2">
+          <div class="truncate">
+            <div class="font-medium text-xs text-slate-900 truncate">${h.job_title} · ${h.company}</div>
+            <div class="text-[11px] text-slate-400">${h.created_at}</div>
+          </div>
+          <span class="text-xs text-slate-600 font-medium shrink-0">View</span>
+        </div>
+      `).join("");
+    }
+
+    function selectHistoryItem(id) {
+      const item = HISTORY.find(h => h.id === id);
+      if (item) displayTailoredPackage(item);
+    }
+
+    async function loadRadar(refresh = false) {
+      const btn = document.getElementById("btn-refresh-radar");
+      if (refresh) {
+        btn.textContent = "Scanning...";
+        btn.disabled = true;
+      }
+      try {
+        const res = await fetch(`/api/radar/${ACTIVE_USER_ID}?refresh=${refresh}`);
+        const data = await res.json();
+        const radar = data.radar || {};
+        const top3 = radar.top_3 || [];
+        const relatable = radar.relatable || [];
+
+        const top3El = document.getElementById("radar-top3");
+        if (top3.length === 0) {
+          top3El.innerHTML = `<div class="col-span-3 bg-white rounded-xl border border-slate-200 p-8 text-center text-xs text-slate-400">Click "Scan for Jobs" to find matching roles.</div>`;
+        } else {
+          top3El.innerHTML = top3.map((j, idx) => `
+            <div class="bg-white rounded-xl border border-slate-300 p-4 shadow-sm flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between gap-2 mb-1.5">
+                  <span class="bg-slate-900 text-white text-[11px] font-semibold px-2 py-0.5 rounded">#${idx + 1} Pick · ${j.score}%</span>
+                  <span class="text-[11px] text-slate-400">${j.source}</span>
+                </div>
+                <h5 class="font-bold text-slate-900 text-sm">${j.title}</h5>
+                <p class="text-xs text-slate-500 mt-0.5">${j.company} · ${j.location}</p>
+                <p class="text-xs text-slate-600 mt-2.5 leading-relaxed">${j.reason}</p>
+              </div>
+              <div class="flex items-center gap-2 mt-4 pt-3 border-t border-slate-100">
+                <button onclick='sendRadarJobToStudio(${JSON.stringify(j).replace(/'/g, "&#39;")})' class="flex-1 bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold py-1.5 px-3 rounded-lg transition">
+                  Tailor CV
+                </button>
+                <a href="${j.url}" target="_blank" class="px-2.5 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-600 text-xs font-medium transition">
+                  Open ↗
+                </a>
+              </div>
+            </div>
+          `).join("");
+        }
+
+        const relEl = document.getElementById("radar-relatable");
+        relEl.innerHTML = relatable.map(j => `
+          <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between">
+                <h5 class="font-semibold text-slate-900 text-sm">${j.title}</h5>
+                <span class="text-xs text-slate-500">${j.score}% · ${j.source}</span>
+              </div>
+              <p class="text-xs text-slate-500">${j.company} · ${j.location}</p>
+              <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">${j.reason}</p>
+            </div>
+            <div class="flex items-center gap-2 mt-3 pt-2 border-t border-slate-100">
+              <button onclick='sendRadarJobToStudio(${JSON.stringify(j).replace(/'/g, "&#39;")})' class="text-xs font-semibold text-slate-900 hover:underline">
+                Tailor CV &rarr;
+              </button>
+              <a href="${j.url}" target="_blank" class="ml-auto text-xs text-slate-400 hover:text-slate-700">Open ↗</a>
+            </div>
+          </div>
+        `).join("");
+      } catch (e) {
+        console.error(e);
+      } finally {
+        btn.textContent = "Scan for Jobs";
+        btn.disabled = false;
+      }
+    }
+
+    function sendRadarJobToStudio(job) {
+      switchTab("tailor");
+      document.getElementById("tailor-url").value = job.url || "";
+      document.getElementById("tailor-desc").value = job.description || "";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    async function saveProfileChanges() {
+      if (!CURRENT_USER) return;
+
+      CURRENT_USER.search_keywords = document.getElementById("prof-keywords").value.split(",").map(s => s.trim()).filter(Boolean);
+      CURRENT_USER.cv_data.full_name = document.getElementById("cv-fullname").value.trim();
+      CURRENT_USER.cv_data.headline = document.getElementById("cv-headline").value.trim();
+      CURRENT_USER.cv_data.email = document.getElementById("cv-email").value.trim();
+      CURRENT_USER.email = CURRENT_USER.cv_data.email;
+      CURRENT_USER.cv_data.phone = document.getElementById("cv-phone").value.trim();
+      CURRENT_USER.cv_data.location = document.getElementById("cv-location").value.trim();
+      CURRENT_USER.cv_data.linkedin = document.getElementById("cv-linkedin").value.trim();
+      CURRENT_USER.cv_data.summary = document.getElementById("cv-summary").value.trim();
+      CURRENT_USER.cv_data.technology = document.getElementById("cv-tech").value.trim();
+
+      const btn = document.getElementById("btn-save-profile");
+      btn.textContent = "Saving...";
+      try {
+        const res = await fetch("/api/users/update", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ user_id: ACTIVE_USER_ID, profile: CURRENT_USER })
+        });
+        const data = await res.json();
+        if (data.ok) {
+          CURRENT_USER = data.user;
+          renderActiveUserUI();
+          alert("Saved!");
+        }
+      } finally {
+        btn.textContent = "Save Changes";
+      }
+    }
+
+    async function rebuildProfileWithUploadOrNotes() {
+      const notes = document.getElementById("ai-notes-input").value.trim();
+      const fileInput = document.getElementById("rebuild-cv-file");
+      if (!notes && fileInput.files.length === 0) {
+        return alert("Please select a CV file or enter your updates first.");
+      }
+      const btn = document.getElementById("btn-ai-rebuild");
+      btn.textContent = "Updating...";
+      btn.disabled = true;
+      try {
+        const fd = new FormData();
+        fd.append("user_id", ACTIVE_USER_ID);
+        fd.append("raw_notes", notes);
+        if (fileInput.files.length > 0) {
+          fd.append("cv_file", fileInput.files[0]);
+        }
+        const res = await fetch("/api/users/upload-cv", { method: "POST", body: fd });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || "Failed to update CV");
+
+        CURRENT_USER = data.user;
+        renderActiveUserUI();
+        alert("Master CV updated!");
+      } catch (e) {
+        alert("Error: " + e.message);
+      } finally {
+        btn.textContent = "Update Master CV";
+        btn.disabled = false;
+      }
+    }
+
+    function copyText(elId) {
+      const txt = document.getElementById(elId).textContent;
+      navigator.clipboard.writeText(txt);
+      alert("Copied!");
+    }
+
+    initApp();
+  </script>
+</body>
+</html>

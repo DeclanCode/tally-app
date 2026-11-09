@@ -1,0 +1,312 @@
+[
+  {
+    "id": "declan",
+    "label": "Declan Cooke (Data, BI & Analytics)",
+    "email": "declanjcooke@gmail.com",
+    "digest_enabled": true,
+    "target_roles": [
+      "Power BI Developer",
+      "Business Analytics Consultant",
+      "Analytics Engineer",
+      "Reporting & Insights Analyst",
+      "Product Analyst",
+      "Marketing Data Analyst",
+      "Data Engineer"
+    ],
+    "search_keywords": [
+      "power bi",
+      "data analyst",
+      "product analyst",
+      "analytics engineer",
+      "business intelligence",
+      "snowflake",
+      "dbt"
+    ],
+    "remotive_categories": [
+      "data"
+    ],
+    "freehire_categories": [
+      "data_analytics",
+      "business_analysis",
+      "data_engineering",
+      "solutions_engineering"
+    ],
+    "location_preference": "New Zealand (Remote / Global / APAC)",
+    "cv_data": {
+      "full_name": "Declan Cooke",
+      "headline": "BUSINESS ANALYTICS & REPORTING CONSULTANT",
+      "email": "declanjcooke@gmail.com",
+      "phone": "027 220 8645",
+      "location": "Auckland, New Zealand",
+      "linkedin": "https://www.linkedin.com/in/declanjcooke/",
+      "portfolio": "",
+      "summary": "Dedicated Business Analytics Consultant skilled in designing scalable data pipelines, developing impactful BI solutions, and optimizing SQL queries to deliver high-quality, accessible reporting. Proactive in identifying trends, streamlining data engineering workflows, and translating complex datasets into actionable insights. Strong focus on client and stakeholder collaboration, technical training, and clear communication. Thrives in dynamic consulting environments, always looking for ways to improve, adapt, and deliver meaningful value through data.",
+      "experience": [
+        {
+          "company": "FIRN Analytics",
+          "location": "Auckland",
+          "roles": [
+            {
+              "title": "Business Analytics Consultant",
+              "dates": "Apr 2026 – Present",
+              "location": "Auckland",
+              "bullets": [
+                "Multi-Industry BI & Insights: Delivered end-to-end Power BI reporting, dbt data modeling, and actionable insights for major enterprise clients across broadcasting & media, national gaming & lotteries, and manufacturing sectors.",
+                "Enterprise Data Governance: Architected and executed a large-scale Role-Based Access Control (RBAC) security framework in Snowflake, deploying complex permission scripts with zero errors on initial rollout to secure client data.",
+                "dbt & CI/CD Pipeline Optimization: Built and optimized client dbt and Coalesce data transformation environments in Snowflake, standardizing modular models, automated data quality tests, and CI/CD deployments.",
+                "Marketing Pipelines & Enablement: Engineered automated analytical pipelines integrating Google Ad Manager data and designed a \"Fundamentals of Coalesce\" training curriculum to upskill external clients."
+              ]
+            }
+          ]
+        },
+        {
+          "company": "Kotahi Logistics Ltd",
+          "location": "Auckland",
+          "roles": [
+            {
+              "title": "Reporting & Insights Analyst",
+              "dates": "Aug 2024 – Mar 2026",
+              "location": "Auckland",
+              "bullets": [
+                "Internal Promotion & Leadership: Promoted from Analytics Engineer to Reporting & Insights Analyst in recognition of strong stakeholder engagement, impactful reporting solutions, and driving data accessibility.",
+                "Cloud Analytics Engineering: Engineered Power BI solutions with Databricks and Apache Spark to uncover customer-management and operational insights, directly empowering strategic business decisions.",
+                "Embedded Portal Analytics: Developed and embedded Power BI dashboards within the Salesforce Customer Portal, significantly improving stakeholder access to insights and accelerating decision-making.",
+                "Cloud Migration & Adoption: Led cross-functional workshops and training during a major cloud migration, driving adoption of new Power BI reports and championing data as a product across the business."
+              ]
+            },
+            {
+              "title": "Analytics Engineer",
+              "dates": "Oct 2023 – Aug 2024",
+              "location": "Auckland",
+              "bullets": [
+                "Workflow Automation: Developed Power BI dashboards and Power Apps solutions to automate reporting workflows, eliminating 24 hours of manual processing each month.",
+                "Self-Service Data Modeling: Designed and launched curated dimensional data models, empowering business users with self-service analytics and reducing reliance on ad-hoc report requests.",
+                "Cost & Data Quality Optimization: Led multi-source logistics analysis assessing data completeness, forecasting accuracy, and timeliness, driving direct-from-carrier integrations at significantly lower cost."
+              ]
+            }
+          ]
+        },
+        {
+          "company": "Data Moving Ltd",
+          "location": "Auckland",
+          "roles": [
+            {
+              "title": "Data and Reporting Analyst",
+              "dates": "Jan 2023 – Oct 2023",
+              "location": "Auckland",
+              "bullets": [
+                "Data Warehouse Modernization: Led the adoption of Power BI for a large-scale data warehousing project, utilizing SQL for data cleansing, migration, and analysis to transition legacy reports into modern dashboards."
+              ]
+            }
+          ]
+        },
+        {
+          "company": "Acodata Ltd",
+          "location": "Christchurch",
+          "roles": [
+            {
+              "title": "Data Analyst",
+              "dates": "Jan 2019 – Jan 2023",
+              "location": "Christchurch",
+              "bullets": [
+                "Product & Customer Analytics: Analyzed customer engagement trends, market data, and performance analytics to scope and deliver digital strategies, website designs, and application developments."
+              ]
+            }
+          ]
+        },
+        {
+          "company": "Freelance Film Industry Camera Technician",
+          "location": "Auckland",
+          "roles": [
+            {
+              "title": "1st Assistant Camera",
+              "dates": "Jan 2012 – Jan 2019",
+              "location": "Auckland",
+              "bullets": [
+                "High-Stakes Technical Execution: Collaborated closely with Department Heads in time-sensitive environments to translate creative vision into technical execution while adapting to rapid deadlines."
+              ]
+            }
+          ]
+        }
+      ],
+      "technology": "Power BI (DAX, M Query, Power Query), Tableau, SQL, Snowflake, Coalesce, dbt, Alteryx, Databricks, Power Apps, Power Automate, Azure DevOps, Python (intermediate), Jira, GitHub, AWS, Excel, SharePoint.",
+      "skills": "Analytical Thinking, Collaborative, Constant learner with a growth mindset, Agile, Proactive in solutioning",
+      "certifications": "Google Data Analytics Professional Cert, Udemy Power BI Master Class, Business Analysis Foundations Certificate, SQL Essential Training Certificate, GA Level 3 TEFL Certificate",
+      "interests": "Freediving, Cycling, Gym, Reading, Musical Instruments",
+      "education": [
+        {
+          "institution": "Christchurch Polytechnic Institute of Technology",
+          "degree": "B.A. in Communication (2011) & Diploma in Post Production (2009)",
+          "location": "Christchurch"
+        }
+      ]
+    }
+  },
+  {
+    "id": "user2_cad_cnc",
+    "label": "User #2 (3D CAD/CAM Modeller & CNC Lead)",
+    "email": "declanjcooke@gmail.com",
+    "digest_enabled": false,
+    "target_roles": [
+      "3D CAD / CAM Designer",
+      "Computational & Facade Designer",
+      "CNC Programming & Manufacturing Lead",
+      "Senior Industrial / Marine 3D Modeller",
+      "Digital Fabrication Specialist"
+    ],
+    "search_keywords": [
+      "3d modeler",
+      "cad designer",
+      "rhino",
+      "solidworks",
+      "cnc",
+      "industrial designer",
+      "architectural",
+      "3d artist"
+    ],
+    "remotive_categories": [
+      "design",
+      "all-others"
+    ],
+    "freehire_categories": [
+      "product_design",
+      "engineering_management",
+      "solutions_engineering"
+    ],
+    "location_preference": "New Zealand (Remote / Hybrid / Global)",
+    "cv_data": {
+      "full_name": "Alex Mercer (User #2 Demo)",
+      "headline": "SENIOR 3D CAD/CAM DESIGNER & CNC MANUFACTURING LEAD",
+      "email": "user2@example.com",
+      "phone": "021 000 0000",
+      "location": "Auckland, New Zealand",
+      "linkedin": "",
+      "portfolio": "",
+      "summary": "Hands-on 3D CAD/CAM Specialist and CNC Workshop Manager with deep expertise bridging complex 3D surface modelling and precision digital fabrication. Proven track record of translating architectural artist concepts into production-ready 3D building facade geometry, engineering high-performance yachting components for America's Cup campaigns, and leading end-to-end marine CNC machining operations. Experienced in managing distributed international design workflows, including leading remote CAD/CAM direct reports in Europe while running local workshop production in New Zealand.",
+      "experience": [
+        {
+          "company": "Marine Engineering & CNC Fabrication Workshop",
+          "location": "Auckland",
+          "roles": [
+            {
+              "title": "CNC Workshop Manager & Lead 3D CAD/CAM Technician",
+              "dates": "2023 – Present",
+              "location": "Auckland",
+              "bullets": [
+                "End-to-End 3D Design to Fabrication: Lead both 3D CAD modelling and multi-axis CAM toolpath programming through to hands-on CNC machine operation for precision marine engineering and bespoke structural components.",
+                "International Remote Team Leadership: Manage and review daily CAD/CAM deliverables for a direct report working remotely from Poland, coordinating asynchronous 3D file handoffs, quality control, and production scheduling.",
+                "Workshop Operations & Optimization: Oversee machine scheduling, tooling selection, material nesting, and quality assurance to hit tight marine refit and custom manufacturing deadlines.",
+                "Design for Manufacturability (DFM): Partner directly with naval architects, engineers, and project managers to refine 3D geometries for optimal CNC machining efficiency and structural tolerance."
+              ]
+            }
+          ]
+        },
+        {
+          "company": "Architectural Facade & Bespoke 3D Modelling Studio",
+          "location": "Auckland / Remote",
+          "roles": [
+            {
+              "title": "Senior 3D CAD & Facade Modeller",
+              "dates": "2020 – 2023",
+              "location": "Auckland",
+              "bullets": [
+                "Concept-to-CAD Facade Engineering: Translated 2D artist impressions and architectural concept sketches into millimeter-accurate 3D models for complex commercial building facades and bespoke architectural elements.",
+                "Fabrication-Ready Geometry: Developed parametric and complex surface models engineered specifically for downstream CNC milling, mould-making, and structural assembly.",
+                "Multi-Disciplinary Coordination: Collaborated with architects, structural engineers, and fabrication teams to resolve geometric clashes and deliver complete 3D production packages."
+              ]
+            }
+          ]
+        },
+        {
+          "company": "Emirates Team New Zealand (America's Cup Campaign Contractors)",
+          "location": "Auckland",
+          "roles": [
+            {
+              "title": "3D CAD Modeller & High-Performance Marine Component Specialist",
+              "dates": "2018 – 2020",
+              "location": "Auckland",
+              "bullets": [
+                "America's Cup 3D Part Modelling: Created precision 3D CAD models for custom high-performance yachting parts, aerodynamic/hydrodynamic tooling, and composite mould assemblies for New Zealand's America's Cup team.",
+                "Ultra-Tight Tolerance Execution: Delivered complex 3D surface and solid models under high-pressure campaign timelines where weight, strength, and sub-millimeter CNC accuracy were mission-critical."
+              ]
+            }
+          ]
+        }
+      ],
+      "technology": "3D CAD Surface & Solid Modelling (Rhino 3D, Grasshopper, SolidWorks, Fusion 360, AutoCAD, Inventor), CAM Toolpath Programming (Mastercam, PowerMill, Fusion CAM), Multi-Axis CNC Routing & Milling, G-Code, DFM, PDM/Cloud CAD Collaboration.",
+      "skills": "Concept-to-3D Reconstruction, Architectural Facade Modelling, Marine & Composite Tooling, CNC Workshop Management, Remote Team Leadership (NZ-Europe Async), Precision Quality Control",
+      "certifications": "Trade & Advanced CAD/CAM Fabrication Experience, America's Cup High-Performance Marine Manufacturing",
+      "interests": "Yachting & Marine Design, Digital Fabrication, 3D Printing, Industrial Design",
+      "education": [
+        {
+          "institution": "New Zealand Engineering & Design Training",
+          "degree": "3D CAD/CAM Design & Precision CNC Manufacturing",
+          "location": "Auckland"
+        }
+      ]
+    }
+  },
+  {
+    "id": "d_10e243",
+    "label": "d - Design Writer",
+    "email": "d@d.com",
+    "digest_enabled": true,
+    "target_roles": [
+      "Design Writer",
+      "UX Writer",
+      "Content Designer",
+      "Creative Strategist"
+    ],
+    "search_keywords": [
+      "Design",
+      "UX Writing",
+      "Content Strategy",
+      "Creative Direction",
+      "Copywriting"
+    ],
+    "remotive_categories": [
+      "all-others"
+    ],
+    "freehire_categories": [],
+    "location_preference": "Auckland, New Zealand (Remote / Hybrid / Global)",
+    "cv_data": {
+      "full_name": "d",
+      "headline": "DESIGN WRITER",
+      "email": "d@d.com",
+      "phone": "",
+      "location": "Auckland, New Zealand",
+      "linkedin": "",
+      "portfolio": "",
+      "summary": "Versatile and detail-oriented Design Writer and Creative Specialist based in Auckland, New Zealand. Proven ability to translate complex visual concepts into clear, engaging, and impactful communication across digital and print channels. Passionate about user-centered narrative strategy, modern design systems, and seamless brand experiences.",
+      "experience": [
+        {
+          "company": "Independent Design Consultancy",
+          "location": "Auckland, New Zealand",
+          "roles": [
+            {
+              "title": "Lead Design Writer & Strategist",
+              "dates": "2021 - Present",
+              "location": "Auckland, New Zealand",
+              "bullets": [
+                "Creative Narrative Strategy: Authored compelling brand narratives and design guidelines for multifaceted client initiatives.",
+                "Cross-Functional Collaboration: Partnered with visual artists, product designers, and project managers to streamline design documentation.",
+                "Content Optimization: Iterated on UX copy and visual messaging to elevate overall end-user engagement and user satisfaction."
+              ]
+            }
+          ]
+        }
+      ],
+      "technology": "Figma, Adobe Creative Cloud, Sketch, Canva, Miro, HTML/CSS, WordPress",
+      "skills": "Design Writing, Content Strategy, UX Copywriting, Visual Communication, Brand Identity, Information Architecture",
+      "certifications": "Certified UX Content Designer",
+      "interests": "Typography, Visual Arts, Digital Storytelling, Modern Architecture",
+      "education": [
+        {
+          "institution": "University of Auckland",
+          "degree": "Bachelor of Design",
+          "location": "Auckland, New Zealand"
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,40 @@
+name: Tally Daily Multi-User Job Brief
+
+on:
+  schedule:
+    # 18:00 UTC = 7:00 AM NZDT
+    - cron: '0 18 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  send-daily-briefs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run Tally Daily Job Brief for all active users
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+        run: python daily_digest.py
+
+      - name: Commit updated seen_jobs state
+        run: |
+          git config user.name "Tally Bot"
+          git config user.email "bot@tally.app"
+          git add data/
+          git diff --staged --quiet || git commit -m "Update daily seen jobs state"
+          git push
