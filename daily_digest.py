@@ -152,6 +152,14 @@ def send_user_digest_email(user, top_3, relatable, app_base_url=""):
     msg["Subject"] = subject
     msg["From"] = sender
     msg["To"] = recipient
+
+    recipients = [recipient]
+    cc_email = (user.get("cc_email") or "").strip()
+    cc_until = (user.get("cc_until") or "").strip()
+    today_iso = time.strftime("%Y-%m-%d")
+    if cc_email and cc_email not in recipients and (not cc_until or today_iso <= cc_until):
+        recipients.append(cc_email)
+
     msg.attach(MIMEText("\n".join(text_lines), "plain", "utf-8"))
     msg.attach(MIMEText(html_content, "html", "utf-8"))
 
@@ -161,9 +169,9 @@ def send_user_digest_email(user, top_3, relatable, app_base_url=""):
         server.starttls()
         server.ehlo()
         server.login(sender, password)
-        server.sendmail(sender, recipient, msg.as_string())
+        server.sendmail(sender, recipients, msg.as_string())
         server.quit()
-        print(f"[✓] Sent Tally digest ({total_roles} roles) to {recipient} for user {user.get('id')}")
+        print(f"[✓] Sent Tally digest ({total_roles} roles) to {', '.join(recipients)} for user {user.get('id')}")
         return True
     except Exception as e:
         print(f"[!] Failed to send email to {recipient}: {e}")
