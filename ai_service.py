@@ -268,6 +268,8 @@ def fetch_jobs_for_profile(user_profile):
                         continue
                     seen_ids.add(jid)
                     title = sj.get("title") or "Untitled Role"
+                    if re.search(r"\b(?:retail assistant|freight loader|sales assistant|clinician|nurse|post-doctoral|receptionist|driver|cleaner|barista)\b", title.lower()):
+                        continue
                     company = (sj.get("advertiser") or {}).get("description") or "SEEK NZ Employer"
                     loc_label = ((sj.get("locations") or [{}])[0].get("label") or nz_city).strip()
                     wa_label = (sj.get("workArrangements") or {}).get("displayText") or "Hybrid/On-site"

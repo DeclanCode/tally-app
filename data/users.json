@@ -309,5 +309,78 @@
         }
       ]
     }
+  },
+  {
+    "id": "chch_change_ict",
+    "label": "Digital Transformation, Change & ICT Leader (Christchurch)",
+    "email": "covcity493@gmail.com",
+    "digest_enabled": true,
+    "seek_worktypes": "243,244",
+    "target_roles": [
+      "Change Manager / Change Lead (Prosci)",
+      "Senior Project Manager / Programme Manager (PRINCE2)",
+      "Digital Transformation Lead",
+      "ICT Manager / Deputy CIO / ICT Governance Lead",
+      "Continuous Improvement / Lean Six Sigma Lead",
+      "Business Continuity & Operations Manager"
+    ],
+    "search_keywords": [
+      "change manager",
+      "project manager",
+      "programme manager",
+      "digital transformation",
+      "ict manager",
+      "continuous improvement"
+    ],
+    "remotive_categories": [
+      "project-management",
+      "all-others"
+    ],
+    "freehire_categories": [
+      "business_analysis",
+      "engineering_management"
+    ],
+    "location_preference": "Christchurch, Canterbury (Hybrid / Contract / Part-Time) & New Zealand Remote",
+    "cv_data": {
+      "full_name": "Digital Transformation & Change Leader",
+      "headline": "DIGITAL TRANSFORMATION, CHANGE MANAGEMENT (PROSCI) & ICT LEADER",
+      "email": "covcity493@gmail.com",
+      "phone": "",
+      "location": "Christchurch, New Zealand",
+      "linkedin": "",
+      "portfolio": "",
+      "summary": "Experienced Digital Transformation, Change Management, Project Manager and ICT Leader with more than 20 years of experience leading organisational change, technology transformation, governance, operational management, and high-performing teams. Certified Prosci Change Practitioner, PRINCE2 Practitioner, Lean Six Sigma Practitioner, and ITIL Foundation certified. Proven success delivering complex transformation programmes, establishing governance frameworks, leading operational teams through crisis situations, and driving business improvement across local government, higher education, and telecommunications sectors.",
+      "experience": [
+        {
+          "company": "Enterprise Change, Digital Transformation & ICT Leadership",
+          "location": "Christchurch / New Zealand",
+          "roles": [
+            {
+              "title": "Change Lead, Deputy CIO, Project Manager & ICT Governance Lead",
+              "dates": "20+ Years Experience",
+              "location": "Christchurch, New Zealand",
+              "bullets": [
+                "Enterprise Change Leadership: Change Lead on enterprise-wide digital transformation programmes impacting over 600 staff and 60,000+ customers across local government.",
+                "Executive ICT & Governance Leadership: Served as Deputy CIO and ICT Governance Lead, establishing ICT governance frameworks, architectural review processes, strategic planning, and new ICT operating models.",
+                "Crisis, COVID-19 & Business Continuity Management: Led ICT operational response during COVID-19 and managed business continuity planning during disaster scenarios across a 24/7 ICT operations centre (~120 staff).",
+                "End-to-End Project & Programme Delivery: Managed multiple ICT and enterprise technology projects from procurement through implementation, service transition, and operational readiness.",
+                "Continuous Improvement & Training: Delivered significant operational efficiencies through Lean Six Sigma process improvement, organisational change, and custom training programmes."
+              ]
+            }
+          ]
+        }
+      ],
+      "technology": "Prosci Change Management, PRINCE2 Project & Programme Management, Lean Six Sigma, ITIL Service Management, CIMS4 Emergency Management, ICT Strategy & Architecture Governance, Business Continuity Planning, Agile Delivery.",
+      "skills": "Change Management (Prosci), Project & Programme Management (PRINCE2), Digital Transformation, ICT Strategy & Governance, Stakeholder Engagement, People Leadership & Coaching, Organisational Development, Operational Management, Business Continuity Planning, Continuous Improvement (Lean Six Sigma), Agile Delivery, Cyber Security Awareness, Learning & Development.",
+      "certifications": "Prosci Change Management Practitioner, PRINCE2 Practitioner, Lean Six Sigma Practitioner, ITIL Foundation, CIMS4 Emergency Management, Team Mastery Facilitator, Qualified Teacher and Adult Educator.",
+      "interests": "",
+      "education": [
+        {
+          "institution": "University",
+          "degree": "Bachelor of Arts (Honours) & Qualified Teacher / Adult Educator",
+          "location": "New Zealand"
+        }
+      ]
+    }
   }
 ]
