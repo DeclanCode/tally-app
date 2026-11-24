@@ -226,15 +226,72 @@ Return JSON in this exact schema:
 
 def fetch_jobs_for_profile(user_profile):
     """
-    Fetches candidate jobs across Himalayas, Remotive, and Freehire tailored to the user's `search_keywords` and categories.
+    Fetches candidate jobs across SEEK NZ (Contract/Part-Time & Remote), Himalayas, Remotive, and Freehire
+    tailored to the user's `search_keywords`, city/location, and categories.
     """
-    headers = {"User-Agent": "RoleCraft/1.0 (AI Job Radar)"}
-    keywords = user_profile.get("search_keywords") or ["data analyst", "power bi"]
+    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"}
+    keywords = user_profile.get("search_keywords") or user_profile.get("target_roles") or ["data analyst", "power bi"]
     remotive_cats = user_profile.get("remotive_categories") or ["data"]
     freehire_cats = user_profile.get("freehire_categories") or ["data_analytics"]
 
     candidates = []
     seen_ids = set()
+
+    # 0. SEEK NZ API (Local City Hybrid/On-site Contract & Part-Time + All-NZ Remote)
+    user_loc = (
+        (user_profile.get("cv_data") or {}).get("location", "")
+        + " "
+        + user_profile.get("location_preference", "")
+    ).lower()
+    nz_city = "All New Zealand"
+    for city in ["Christchurch", "Auckland", "Wellington", "Hamilton", "Tauranga", "Dunedin"]:
+        if city.lower() in user_loc:
+            nz_city = city
+            break
+
+    seek_worktypes = user_profile.get("seek_worktypes", "243,244")  # 243 = Part-Time, 244 = Contract/Temp
+    seek_url = "https://www.seek.co.nz/api/jobsearch/v5/search"
+    for kw in keywords[:6]:
+        seek_queries = [
+            {"siteKey": "NZ-Main", "where": nz_city, "keywords": kw, "worktype": seek_worktypes, "pageSize": 10, "sortmode": "ListedDate"},
+            {"siteKey": "NZ-Main", "where": "All New Zealand", "keywords": kw, "worktype": seek_worktypes, "workarrangement": "3", "pageSize": 10, "sortmode": "ListedDate"},
+        ]
+        for sq in seek_queries:
+            try:
+                resp = requests.get(seek_url, params=sq, headers=headers, timeout=12)
+                if resp.status_code != 200:
+                    continue
+                for sj in (resp.json().get("data") or []):
+                    sid = str(sj.get("id") or "")
+                    jid = f"seek_{sid}"
+                    if not sid or jid in seen_ids:
+                        continue
+                    seen_ids.add(jid)
+                    title = sj.get("title") or "Untitled Role"
+                    company = (sj.get("advertiser") or {}).get("description") or "SEEK NZ Employer"
+                    loc_label = ((sj.get("locations") or [{}])[0].get("label") or nz_city).strip()
+                    wa_label = (sj.get("workArrangements") or {}).get("displayText") or "Hybrid/On-site"
+                    wt_label = ", ".join(sj.get("workTypes") or ["Contract/Part-Time"])
+                    sal = (sj.get("salaryLabel") or "").strip()
+                    teaser = sj.get("teaser") or ""
+                    bullets = " ".join(sj.get("bulletPoints") or [])
+                    sub_class = (sj.get("classifications") or [{}])[0].get("subclassification", {}).get("description", "")
+                    desc_text = f"{title} | {sub_class} | {wt_label} | {sal} | {teaser} {bullets}".strip()
+                    loc_display = f"{loc_label} ({wa_label} • {wt_label})"
+                    if sal:
+                        loc_display = f"{loc_display} • {sal}"
+                    candidates.append({
+                        "id": jid,
+                        "title": title,
+                        "company": company,
+                        "location": loc_display,
+                        "url": f"https://nz.seek.com/job/{sid}",
+                        "source": "SEEK NZ",
+                        "employment_type": wt_label,
+                        "description": desc_text[:3000]
+                    })
+            except Exception:
+                pass
 
     # 1. Himalayas Search API (Supports any profession/keyword!)
     for kw in keywords[:6]:
